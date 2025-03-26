@@ -8,6 +8,10 @@
       href="https://fonts.googleapis.com/css?family=Poppins"
       rel="stylesheet"
     />
+    <link
+      rel="shortcut icon"
+      href="https://mozilla.github.io/pdf.js/images/favicon.ico"
+    />
     <style>
       body {
         all: unset;
@@ -18,7 +22,7 @@
 
       h1 {
         text-align: center;
-        margin: 20px;
+        margin: 20px 0;
         width: 100%;
       }
 
@@ -43,9 +47,9 @@
       /* Tabs and Container */
       .tabs-container {
         width: 80%;
-        margin: 0 auto;
-        margin-top: 20px;
+        margin: 20px auto;
       }
+      /* Tabs */
       .tabs-container div:first-child {
         display: flex;
       }
@@ -64,7 +68,11 @@
         border-bottom: 2px solid #6c6767;
       }
       .tabs-container div:first-child h4.active {
-        background-color: #6c6767;
+        background-color: rgb(108, 103, 103);
+      }
+      .tabs-container div:first-child h4.disabled {
+        background-color: rgb(108, 103, 103, 0.5);
+        cursor: not-allowed;
       }
       .tabs-container div:first-child h4:first-child {
         border-top-left-radius: 10px;
@@ -72,8 +80,9 @@
       .tabs-container div:first-child h4:last-child {
         border-top-right-radius: 10px;
       }
-      .tabs-container div:last-child {
-        padding: 10px;
+      /* Containers */
+      .tabs-container div:nth-child(2) {
+        padding: 10px 40px;
         border-radius: 0 0 10px 10px;
         background-color: #4d4b4b;
       }
@@ -83,33 +92,100 @@
       .tabs-container div:nth-child(2) div.active {
         display: block;
       }
+      .tabs-container div:nth-child(2) > * {
+        width: 100%;
+      }
     </style>
   </head>
   <body>
     <h1>PDF To HTML</h1>
     <div id="dropzone">
-      Drop your files or <button id="manual-upload-btn">Click to upload</button>
+      Drop your files or
+      <button id="manual-upload-btn">Click to upload</button>
     </div>
 
     <div class="tabs-container">
       <div>
         <h4 class="active">PDF</h4>
-        <h4>HTML</h4>
+        <h4 class="disabled">HTML</h4>
       </div>
       <div>
-        <div class="active">Pdf File</div>
+        <canvas class="active">Pdf File</canvas>
         <div>Html File</div>
       </div>
     </div>
 
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+      integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"
+      integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
-      function manualUpload(e) {}
+      var file, pdf;
+
+      function loadPdfPage(pageNumber) {
+        pdf.getPage(pageNumber).then(function (page) {
+          console.debug("Page loaded");
+          var scale = 2;
+          var viewport = page.getViewport({ scale });
+          var canvas = $("canvas")[0];
+          var context = canvas.getContext("2d");
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          var renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+          };
+          var renderTask = page.render(renderContext);
+          renderTask.promise.then(function () {
+            console.debug("Page rendered");
+          });
+        });
+      }
+
+      function handleFile(e) {
+        file = e.target.files[0];
+        if (file.type !== "application/pdf") {
+          alert("Please upload a PDF file");
+          return;
+        }
+        $(".tabs-container h4:first-child").text(file.name);
+        $(".tabs-container h4:nth-child(2)").removeClass("disabled");
+        $(".tabs-container h4:nth-child(2)").text(
+          file.name.replace(".pdf", ".html")
+        );
+        console.log(file.name, file.name.replace(".pdf", ".html"));
+        console.debug(file);
+        var fileReader = new FileReader();
+        fileReader.onload = function () {
+          console.debug("PDF loading");
+          var pdfData = new Uint8Array(this.result);
+          var loadingTask = pdfjsLib.getDocument(pdfData);
+          loadingTask.promise.then(function (pdf_) {
+            pdf = pdf_;
+            loadPdfPage(1);
+          });
+        };
+        fileReader.readAsArrayBuffer(file);
+      }
+
+      function manualUpload(e) {
+        e.preventDefault();
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".pdf";
+        input.onchange = handleFile;
+        input.click();
+      }
 
       document.addEventListener("DOMContentLoaded", (event) => {
-        const dropzone = document.getElementById("dropzone");
-        const manualUploadBtn = document.getElementById("manual-upload-btn");
-
-        manualUploadBtn.add;
+        $("#manual-upload-btn").on("click", manualUpload);
       });
     </script>
   </body>
