@@ -81,19 +81,17 @@
         border-top-right-radius: 10px;
       }
       /* Containers */
-      .tabs-container div:nth-child(2) {
+      .tabs-container > div:nth-child(2) {
         padding: 10px 40px;
         border-radius: 0 0 10px 10px;
         background-color: #4d4b4b;
       }
-      .tabs-container div:nth-child(2) div {
-        display: none;
-      }
-      .tabs-container div:nth-child(2) div.active {
-        display: block;
-      }
       .tabs-container div:nth-child(2) > * {
+        display: none;
         width: 100%;
+      }
+      .tabs-container div:nth-child(2) > *.active {
+        display: block;
       }
     </style>
   </head>
@@ -184,8 +182,18 @@
         input.click();
       }
 
+      function selectTab(e) {
+        $(".tabs-container div:first-child h4").removeClass("active");
+        $(e.target).addClass("active");
+        $(".tabs-container div:nth-child(2) > *").removeClass("active");
+        $(".tabs-container div:nth-child(2) > *")
+          .eq($(e.target).index())
+          .addClass("active");
+      }
+
       document.addEventListener("DOMContentLoaded", (event) => {
         $("#manual-upload-btn").on("click", manualUpload);
+        $(".tabs-container div:first-child h4").on("click", selectTab);
       });
     </script>
   </body>
