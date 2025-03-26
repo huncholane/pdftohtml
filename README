@@ -8,7 +8,7 @@ This project allows you to upload a PDF file, view the PDF rendered as an image 
 
 - **Upload PDF**: Users can upload a PDF file.
 - **Render PDF as Image**: The PDF is rendered as an image on the canvas, allowing users to view the PDF content.
-- **PDF to HTML Conversion**: The text content of the PDF is extracted and displayed in HTML format.
+- **PDF to HTML Conversion**: The text content of the PDF is extracted and displayed in HTML format. This is done in the browser with no api calls.
 
 ## Progress
 
