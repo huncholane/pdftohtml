@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF To HTML</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        all: unset;
+        background-color: rgb(35, 33, 33);
+        color: white;
+        font-family: "Poppins";
+      }
+
+      h1 {
+        text-align: center;
+        margin: 20px;
+        width: 100%;
+      }
+
+      /* Dropzone */
+      #dropzone {
+        border: 2px dashed #4d4b4b;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 10px;
+        padding: 20px;
+      }
+      #dropzone button {
+        all: unset;
+        cursor: pointer;
+        color: rgb(164, 164, 236);
+      }
+      #dropzone button:hover {
+        color: rgb(255, 255, 255);
+      }
+
+      /* Tabs and Container */
+      .tabs-container {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+      .tabs-container div:first-child {
+        display: flex;
+      }
+      .tabs-container div:first-child h4 {
+        width: 50%;
+        text-align: center;
+        cursor: pointer;
+        padding: 10px;
+        margin: 0;
+      }
+      .tabs-container div:first-child h4:hover {
+        background-color: #6c6767;
+      }
+      .tabs-container div:first-child h4 {
+        background-color: #4d4b4b;
+        border-bottom: 2px solid #6c6767;
+      }
+      .tabs-container div:first-child h4.active {
+        background-color: #6c6767;
+      }
+      .tabs-container div:first-child h4:first-child {
+        border-top-left-radius: 10px;
+      }
+      .tabs-container div:first-child h4:last-child {
+        border-top-right-radius: 10px;
+      }
+      .tabs-container div:last-child {
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        background-color: #4d4b4b;
+      }
+      .tabs-container div:nth-child(2) div {
+        display: none;
+      }
+      .tabs-container div:nth-child(2) div.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>PDF To HTML</h1>
+    <div id="dropzone">
+      Drop your files or <button id="manual-upload-btn">Click to upload</button>
+    </div>
+
+    <div class="tabs-container">
+      <div>
+        <h4 class="active">PDF</h4>
+        <h4>HTML</h4>
+      </div>
+      <div>
+        <div class="active">Pdf File</div>
+        <div>Html File</div>
+      </div>
+    </div>
+
+    <script>
+      function manualUpload(e) {}
+
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const dropzone = document.getElementById("dropzone");
+        const manualUploadBtn = document.getElementById("manual-upload-btn");
+
+        manualUploadBtn.add;
+      });
+    </script>
+  </body>
+</html>
