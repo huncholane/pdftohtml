@@ -1,5 +1,7 @@
 # HTML to PDF
 
+![Demo Image](demo.png)
+
 ## Description
 
 This project allows you to upload a PDF file, view the PDF rendered as an image on the page, and see its content converted into HTML. It leverages `pdf.js` for rendering the PDF and extracting text to display it in HTML format.
