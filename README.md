@@ -33,5 +33,9 @@ This project allows you to upload a PDF file, view the PDF rendered as an image 
 
 1. Clone the repository (if applicable):
    ```bash
-   git clone https://github.com/yourusername/html-to-pdf.git
+   git clone https://github.com/huncholane/pdftohtml.git
+   ```
+2. Open the html file or run with a server like
+   ```bash
+   python3 -m http.server 9000
    ```
