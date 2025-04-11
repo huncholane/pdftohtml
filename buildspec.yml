@@ -4,4 +4,4 @@ phases:
   build:
     commands:
       - echo "No build needed – uploading to S3"
-      - aws s3 cp index.html s3://hygo.htmltopdf/index.html
+      - aws s3 cp index.html s3://hygo.pdftohtml/index.html
