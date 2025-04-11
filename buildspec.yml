@@ -4,14 +4,4 @@ phases:
   build:
     commands:
       - echo "No build needed – uploading to S3"
-
-artifacts:
-  files:
-    - "**/*"
-  exclude-paths:
-    - "**/buildspec.yml"
-    - "**/README.md"
-    - "**/.git/**/*"
-  base-directory: .
-  name: /
-  destination: hygo.pdftohtml
+      - aws s3 cp index.html s3://hygo.htmltopdf/index.html
