@@ -14,5 +14,5 @@ artifacts:
     - "**/.git/**/*"
   base-directory: .
   discard-paths: no
-  name: /
+  name: uhhh
   destination: hygo.pdftohtml
