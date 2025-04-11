@@ -8,7 +8,11 @@ phases:
 artifacts:
   files:
     - "**/*"
+  exclude-files:
+    - "**/buildspec.yml"
+    - "**/README.md"
+    - "**/.git/**/*"
   base-directory: .
   discard-paths: no
-  name: none
+  name: /
   destination: hygo.pdftohtml
